@@ -13,7 +13,7 @@ class Dir extends Component {
     super(props);
     this.state = {
       loading: true,
-      dir: {},
+      dir: {}
     };
   }
 
@@ -21,10 +21,14 @@ class Dir extends Component {
     this.loadContent();
   }
 
+  reload() {
+    this.setState({ loading: true });
+    this.loadContent();
+  }
+
   async loadContent() {
     try {
       const dir = await api.getContent(this.props.match.params.path || '');
-      console.log(dir);
       this.setState({ loading: false, dir });
     } catch (e) {
       console.log(e);
@@ -71,7 +75,7 @@ class Dir extends Component {
       <Container>
         <Row {...rowProps}>
           <Col {...colProps}>
-            <PathForm />
+            <PathForm path={this.props.match.params.path} />
           </Col>
         </Row>
         <h1 className="text-center">Content</h1>
@@ -79,7 +83,7 @@ class Dir extends Component {
           <Col {...colProps}>
             <UploadModal
               uploadTo={this.props.match.params.path}
-              reload={() => this.loadContent()}
+              reload={() => this.reload()}
             />
           </Col>
         </Row>

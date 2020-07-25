@@ -3,16 +3,31 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 import api from '../api/api';
 
 class FilesForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { files: [], uploading: false };
+    this.state = { files: [], uploading: false, showAlert: false, alert: {} };
   }
 
   onChange(e) {
     this.setState({ files: e.target.files });
+  }
+
+  showAlert(alert) {
+    if (this.state.showAlert) {
+      return (
+        <Alert
+          variant={alert.success ? 'success' : 'danger'}
+          onClose={() => this.setState({ showAlert: false })}
+          dismissible
+        >
+          {alert.message}
+        </Alert>
+      );
+    }
   }
 
   async onSubmit(e) {
@@ -24,8 +39,7 @@ class FilesForm extends Component {
         data.append('file', file);
       }
       const res = await api.uploadFiles(this.props.uploadTo || '', data);
-      console.log(res);
-      this.setState({ uploading: false });
+      this.setState({ uploading: false, alert: res, showAlert: true });
       this.props.reload();
     } catch (e) {
       console.log(e);
@@ -44,17 +58,20 @@ class FilesForm extends Component {
       );
     }
     return (
-      <Form className="mb-3" onSubmit={(e) => this.onSubmit(e)}>
-        <Form.Label>Upload File</Form.Label>
-        <Form.File
-          multiple
-          className="mb-2"
-          onChange={(e) => this.onChange(e)}
-        />
-        <Button variant="primary" type="submit">
-          Upload
-        </Button>
-      </Form>
+      <>
+        {this.showAlert(this.state.alert)}
+        <Form className="mb-3" onSubmit={(e) => this.onSubmit(e)}>
+          <Form.Label>Upload File</Form.Label>
+          <Form.File
+            multiple
+            className="mb-2"
+            onChange={(e) => this.onChange(e)}
+          />
+          <Button variant="primary" type="submit">
+            Upload
+          </Button>
+        </Form>
+      </>
     );
   }
 }

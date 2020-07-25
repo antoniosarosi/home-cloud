@@ -4,7 +4,10 @@ const enoent = (err, req, res, next) => {
     err.message = 'Directory does not exist';
     err.statusCode = 400;
   }
-  res.status(err.statusCode || 500).json({ message: err.message });
+  res.status(err.statusCode || 500).json({
+    message: err.message,
+    success: false
+  });
 };
 
 module.exports = enoent;

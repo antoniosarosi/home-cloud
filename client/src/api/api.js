@@ -21,7 +21,6 @@ class Api {
   }
 
   async uploadFiles(path, files) {
-    console.log(files)
     return await this.apiCall(() => this.api.post(`${path}`, files));
   }
 }

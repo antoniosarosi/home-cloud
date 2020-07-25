@@ -7,7 +7,7 @@ require('dotenv').config();
 
 router.use(fileUpload());
 
-const storage = process.env.STORAGE;
+const storage = process.env.HOME_CLOUD_STORAGE;
 
 const processPath = (storagePath) => {
   const relativePath = storagePath ? storagePath.replace(/-/g, '/') : '/';
@@ -65,6 +65,7 @@ router.post('/:path?', async (req, res, next) => {
   }
   
   res.json({
+    success: true,
     message: 'Files successfully stored',
     path: dirPath.relativePath
   });
