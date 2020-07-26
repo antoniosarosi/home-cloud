@@ -1,0 +1,30 @@
+const router = require('express').Router();
+const fileUpload = require('express-fileupload');
+const processPath = require('../lib/path');
+const moveFile = require('../lib/mv');
+
+router.use(fileUpload());
+
+router.post('/:path?', async (req, res, next) => {
+  const dirPath = processPath(req.params.path);
+  let files = req.files.file;
+  if (!Array.isArray(files)) {
+    files = [files];
+  }
+
+  try {
+    for (const file of files) {
+      await moveFile(file, dirPath.absolutePath);
+    }
+  } catch (err) {
+    return next(err);
+  }
+  
+  res.json({
+    success: true,
+    message: 'Files successfully stored',
+    path: dirPath.relativePath
+  });
+});
+
+module.exports = router;

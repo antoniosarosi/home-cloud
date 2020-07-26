@@ -17,11 +17,12 @@ class Api {
   }
 
   async getContent(path) {
-    return await this.apiCall(() => this.api.get(`/${path}`));
+    console.log(path)
+    return await this.apiCall(() => this.api.get(`/content/${path}`));
   }
 
   async uploadFiles(path, files) {
-    return await this.apiCall(() => this.api.post(`${path}`, files));
+    return await this.apiCall(() => this.api.post(`/upload/${path}`, files));
   }
 }
 
