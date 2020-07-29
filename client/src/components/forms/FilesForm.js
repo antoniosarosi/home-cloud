@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
 import Loading from '../Loading';
+import Alert from '../Alert';
 import api from '../../api/api';
 
 class FilesForm extends Component {
@@ -19,12 +19,9 @@ class FilesForm extends Component {
     if (this.state.showAlert) {
       return (
         <Alert
-          variant={alert.success ? 'success' : 'danger'}
+          alert={alert}
           onClose={() => this.setState({ showAlert: false })}
-          dismissible
-        >
-          {alert.message}
-        </Alert>
+        />
       );
     }
   }
@@ -32,17 +29,21 @@ class FilesForm extends Component {
   async onSubmit(e) {
     e.preventDefault();
     this.setState({ uploading: true });
+    let response = {};
+
     try {
       const data = new FormData();
       for (const file of this.state.files) {
         data.append('file', file);
       }
-      const res = await api.uploadFiles(this.props.uploadTo || '', data);
-      this.setState({ uploading: false, alert: res, showAlert: true });
+      response = await api.uploadFiles(this.props.uploadTo || '', data);
       this.props.reload();
     } catch (e) {
+      response = e;
       console.log(e);
     }
+
+    this.setState({ uploading: false, alert: response, showAlert: true });
   }
 
   render() {

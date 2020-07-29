@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
 import { CloudArrowUpFill, FolderPlus } from 'react-bootstrap-icons';
 import FormModal from './FormModal';
 import PathForm from './forms/PathForm';
@@ -101,7 +100,7 @@ class Dir extends Component {
               title="Create Directory"
               icon={<FolderPlus {...iconStyle} />}
             >
-              <MkDirForm path={path} />
+              <MkDirForm path={path} reload={() => this.reload()} />
             </FormModal>
           </Col>
         </Row>
