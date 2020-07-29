@@ -3,8 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
-import UploadModal from './UploadModal';
-import PathForm from './PathForm';
+import { CloudArrowUpFill, FolderPlus } from 'react-bootstrap-icons';
+import FormModal from './FormModal';
+import PathForm from './forms/PathForm';
+import FilesForm from './forms/FilesForm';
+import MkDirForm from './forms/MkDirForm';
 import Dirent from './Dirent';
 import api from '../api/api';
 
@@ -13,7 +16,7 @@ class Dir extends Component {
     super(props);
     this.state = {
       loading: true,
-      dir: {}
+      dir: {},
     };
   }
 
@@ -70,21 +73,37 @@ class Dir extends Component {
   render() {
     const rowProps = { className: 'mx-auto' };
     const colProps = { className: 'm-2' };
+    const iconStyle = { color: '#FFF', size: 24, className: 'ml-2' };
+    const path = this.props.match.params.path;
 
     return (
       <Container>
         <Row {...rowProps}>
           <Col {...colProps}>
-            <PathForm path={this.props.match.params.path} />
+            <PathForm path={path} />
           </Col>
         </Row>
         <h1 className="text-center">Content</h1>
         <Row {...rowProps}>
           <Col {...colProps}>
-            <UploadModal
-              uploadTo={this.props.match.params.path}
-              reload={() => this.reload()}
-            />
+            <FormModal
+              btn="primary"
+              title="Upload Files"
+              icon={<CloudArrowUpFill {...iconStyle} />}
+            >
+              <FilesForm uploadTo={path} reload={() => this.reload()} />
+            </FormModal>
+          </Col>
+        </Row>
+        <Row {...rowProps}>
+          <Col {...colProps}>
+            <FormModal
+              btn="success"
+              title="Create Directory"
+              icon={<FolderPlus {...iconStyle} />}
+            >
+              <MkDirForm path={path} />
+            </FormModal>
           </Col>
         </Row>
         <Row {...rowProps}>{this.fillEntries()}</Row>

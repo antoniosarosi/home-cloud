@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
-import api from '../api/api';
+import api from '../../api/api';
 
 class FilesForm extends Component {
   constructor(props) {

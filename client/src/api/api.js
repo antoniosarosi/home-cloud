@@ -17,12 +17,15 @@ class Api {
   }
 
   async getContent(path) {
-    console.log(path)
     return await this.apiCall(() => this.api.get(`/content/${path}`));
   }
 
   async uploadFiles(path, files) {
     return await this.apiCall(() => this.api.post(`/upload/${path}`, files));
+  }
+
+  async mkDir(path, name) {
+    return await this.apiCall(() => this.api.post(`/dir/${path}`, { name }));
   }
 }
 
