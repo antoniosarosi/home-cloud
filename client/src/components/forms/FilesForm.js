@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
+import Loading from '../Loading';
 import api from '../../api/api';
 
 class FilesForm extends Component {
@@ -48,14 +47,7 @@ class FilesForm extends Component {
 
   render() {
     if (this.state.uploading) {
-      return (
-        <Container className="text-center">
-          <h5>Uploading files...</h5>
-          <Spinner animation="border" variant="primary" className="mx-auto">
-            <span className="sr-only">Uploading...</span>
-          </Spinner>
-        </Container>
-      );
+      return <Loading title="Uploading files..." text="Uploading" />;
     }
     return (
       <>

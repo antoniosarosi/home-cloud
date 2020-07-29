@@ -10,6 +10,7 @@ import FilesForm from './forms/FilesForm';
 import MkDirForm from './forms/MkDirForm';
 import Dirent from './Dirent';
 import api from '../api/api';
+import Loading from './Loading';
 
 class Dir extends Component {
   constructor(props) {
@@ -41,9 +42,7 @@ class Dir extends Component {
   fillEntries() {
     if (this.state.loading) {
       return (
-        <Spinner animation="border" variant="primary" className="mx-auto">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
+        <Loading text="Loading..." />
       );
     }
 
