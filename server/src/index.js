@@ -4,6 +4,8 @@ const contentRouter = require('./routes/content');
 const uploadRouter = require('./routes/upload');
 const dirRouter = require('./routes/dir');
 const enoent = require('./middlewares/enoent');
+const eexist = require('./middlewares/eexist');
+const err = require('./middlewares/err');
 
 const port = process.env.PORT || 5000;
 
@@ -18,7 +20,11 @@ app.get('/', (req, res) => res.send('Home cloud API'));
 app.use('/content', contentRouter);
 app.use('/upload', uploadRouter);
 app.use('/dir', dirRouter);
+
+// Errors
 app.use(enoent);
+app.use(eexist);
+app.use(err);
 
 // Server
 app.listen(port, () => console.log('Server running on port', port));

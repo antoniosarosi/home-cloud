@@ -1,13 +1,12 @@
+const { manageErr } = require('./base');
+
 const enoent = (err, req, res, next) => {
-  console.log(err);
-  if (err.code === 'ENOENT') {
-    err.message = 'Directory does not exist';
-    err.statusCode = 400;
-  }
-  res.status(err.statusCode || 500).json({
-    message: err.message,
-    success: false
+  manageErr(err, {
+    code: 'ENOENT',
+    message: 'Directory does not exist',
+    statusCode: 400,
   });
+  next(err);
 };
 
 module.exports = enoent;
