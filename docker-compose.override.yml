@@ -7,7 +7,7 @@ services:
         volumes:
             - ./server:/usr/src/app/server
             - ${HOME_CLOUD_STORAGE}:/usr/src/app/storage
-        command: "npm start"
+        command: "npm run dev"
 
     react:
         image: "node:current-alpine"
