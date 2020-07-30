@@ -2,27 +2,14 @@ version: '3'
 
 services:
     express:
-        image: "node:current-alpine"
-        working_dir: /usr/src/app/server
-        volumes:
-            - ./server:/usr/src/app/server
-            - ${HOME_CLOUD_STORAGE}:/usr/src/app/storage
         environment: 
             HOME_CLOUD_STORAGE: /usr/src/app/storage
         ports:
             - "8081:5000"
-        command: "npm start"
 
     react:
-        image: "node:current-alpine"
-        working_dir: /usr/src/app/client
-        environment:
-            REACT_APP_API_URL: ${HOME_CLOUD_API_URL}
-        volumes:
-            - ./client:/usr/src/app/client
         ports:
             - "8080:3000"
-        command: "npm start"
         depends_on: 
             - express
         stdin_open: true

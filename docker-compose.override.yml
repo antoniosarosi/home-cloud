@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    express:
+        image: "node:current-alpine"
+        working_dir: /usr/src/app/server
+        volumes:
+            - ./server:/usr/src/app/server
+            - ${HOME_CLOUD_STORAGE}:/usr/src/app/storage
+        command: "npm start"
+
+    react:
+        image: "node:current-alpine"
+        working_dir: /usr/src/app/client
+        volumes:
+            - ./client:/usr/src/app/client
+        command: "npm start"

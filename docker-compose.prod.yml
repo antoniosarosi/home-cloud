@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    express:
+        build: ./server
+        volumes:
+            - ${HOME_CLOUD_STORAGE}:/usr/src/app/storage
+        environment: 
+            HOME_CLOUD_STORAGE: /usr/src/app/storage
+            NODE_ENV: production
+        ports:
+            - "8081:5000"
+
+    react:
+        build: ./client
+        environment: 
+            REACT_APP_API_URL: ${HOME_CLOUD_API_URL}

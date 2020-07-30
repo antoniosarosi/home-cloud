@@ -7,7 +7,10 @@ router.post('/:path?', async (req, res, next) => {
   const dirPath = processPath(req.params.path);
   const name = req.body.name;
   if (!name) {
-    res.status(400).json({ success: false, message: 'No name was specified' });
+    return res.status(400).json({
+      success: false,
+      message: 'No name was specified',
+    });
   }
 
   try {
