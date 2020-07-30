@@ -101,16 +101,17 @@ already in use).
 
 #### Backend
 
-Move to **./server/** and set the correct value for **HOME_CLOUD_STORAGE** in
-**.env**, and then run npm start:
+Move to **./server/** and set the correct value for **HOME_CLOUD_STORAGE** and
+**HOME_CLOUD_IP_ADDRESS** in **.env** (see examples in **sample.env**), and then
+run npm start:
 ```bash
 npm start
 ```
 
 #### Frontend
 Move to **./client/** and create a file named **.env.production**, set the
-correct value for **REACT_APP_API_URL**. Then, install serve globaly:
-
+correct value for **REACT_APP_API_URL** (see examples in **sample.env**). Then,
+install serve globaly:
 ```bash
 npm i -g serve
 ```

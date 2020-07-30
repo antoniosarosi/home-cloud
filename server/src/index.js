@@ -7,6 +7,7 @@ const enoent = require('./middlewares/enoent');
 const eexist = require('./middlewares/eexist');
 const err = require('./middlewares/err');
 
+const host = process.env.HOME_CLOUD_IP_ADDRESS || 'localhost';
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -27,4 +28,6 @@ app.use(eexist);
 app.use(err);
 
 // Server
-app.listen(port, () => console.log('Server running on port', port));
+app.listen(port, host, () =>
+  console.log(`Server running on http://${host}:${port}`)
+);
