@@ -9,7 +9,7 @@ router.post('/:path?', async (req, res, next) => {
   if (!req.files) {
     return res.status(400).json({
       success: false,
-      message: 'No files were uploaded',
+      message: 'No files were uploaded'
     });
   }
 
@@ -24,13 +24,22 @@ router.post('/:path?', async (req, res, next) => {
       await moveFile(file, dirPath.absolutePath);
     }
   } catch (err) {
-    return next(err);
+    // Sys error
+    if (err.code) {
+      return next(err);
+    }
+
+    return res.status(400).json({
+      success: false,
+      message: err.message,
+      path: dirPath.relativePath
+    });
   }
 
   res.json({
     success: true,
     message: 'Files successfully uploaded',
-    path: dirPath.relativePath,
+    path: dirPath.relativePath
   });
 });
 

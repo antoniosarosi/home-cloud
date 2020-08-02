@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const storage = process.env.HOME_CLOUD_STORAGE;
 if (!storage) {
-  console.log(
+  console.error(
     'Storage path not defined,',
     'set a value for HOME_CLOUD_STORAGE environment variable'
   );
