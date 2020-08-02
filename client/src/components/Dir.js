@@ -40,9 +40,7 @@ class Dir extends Component {
 
   fillEntries() {
     if (this.state.loading) {
-      return (
-        <Loading text="Loading..." />
-      );
+      return <Loading text="Loading..." />;
     }
 
     const content = this.state.dir.content;
@@ -62,28 +60,27 @@ class Dir extends Component {
     );
 
     const files = content.files.map((file) => (
-      <Dirent name={file} key={file} />
+      <Dirent name={file} key={file} path={path} />
     ));
 
     return [...directories, ...files];
   }
 
   render() {
-    const rowProps = { className: 'mx-auto' };
-    const colProps = { className: 'm-2' };
+    const rowProps = { className: 'mx-auto mb-3' };
     const iconStyle = { color: '#FFF', size: 24, className: 'ml-2' };
     const path = this.props.match.params.path;
 
     return (
       <Container>
         <Row {...rowProps}>
-          <Col {...colProps}>
+          <Col>
             <PathForm path={path} />
           </Col>
         </Row>
         <h1 className="text-center">Content</h1>
         <Row {...rowProps}>
-          <Col {...colProps}>
+          <Col>
             <FormModal
               btn="primary"
               title="Upload Files"
@@ -94,7 +91,7 @@ class Dir extends Component {
           </Col>
         </Row>
         <Row {...rowProps}>
-          <Col {...colProps}>
+          <Col>
             <FormModal
               btn="success"
               title="Create Directory"
