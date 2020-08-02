@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const contentRouter = require('./routes/content');
 const uploadRouter = require('./routes/upload');
+const downloadRouter = require('./routes/download');
 const dirRouter = require('./routes/dir');
 const enoent = require('./middlewares/enoent');
 const eexist = require('./middlewares/eexist');
@@ -19,6 +20,7 @@ app.use(cors());
 app.get('/', (req, res) => res.send('Home cloud API'));
 app.use('/content', contentRouter);
 app.use('/upload', uploadRouter);
+app.use('/download', downloadRouter);
 app.use('/dir', dirRouter);
 
 // Errors
