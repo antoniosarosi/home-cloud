@@ -101,8 +101,8 @@ already in use).
 
 #### Backend
 
-Move to **./server/** and set the correct value for **HOME_CLOUD_STORAGE** and
-**HOME_CLOUD_IP_ADDRESS** in **.env** (see examples in **sample.env**), and then
+Move to **./server/** and set the correct value for **HOME_CLOUD_STORAGE** in
+**.env** (see examples in **sample.env**), and then
 run npm start:
 ```bash
 npm start
