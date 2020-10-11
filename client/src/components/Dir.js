@@ -82,7 +82,7 @@ class Dir extends Component {
         <h1 className="text-center">Content</h1>
         <Row {...rowProps}>
           <Col>
-            <DropFilesForm uploadTo={path} reload={() => this.reload()}></DropFilesForm>
+            <DropFilesForm uploadTo={path} reload={() => this.reload()} />
           </Col>
         </Row>
         <Row {...rowProps}>

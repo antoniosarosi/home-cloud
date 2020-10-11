@@ -9,7 +9,10 @@ class DropFilesForm extends Component {
     this.state = { uploading: false, showAlert: false, alert: {} };
   }
 
-  preventAndStop(e) { e.preventDefault(); e.stopPropagation(); }
+  preventAndStop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
 
   showAlert(alert) {
     if (this.state.showAlert) {
@@ -24,15 +27,17 @@ class DropFilesForm extends Component {
 
   async onSubmit(e) {
     this.preventAndStop(e);
-    if( !e.dataTransfer.files.length || this.state.uploading ) return;
+    if (!e.dataTransfer.files.length || this.state.uploading) {
+      return
+    };
     this.setState({ uploading: true });
     let response = {};
 
     try {
       const data = new FormData();
-      for( let i = 0; i < e.dataTransfer.files.length; i++ ) {
+      for (let i = 0; i < e.dataTransfer.files.length; i++) {
         data.append('file', e.dataTransfer.files[i]);
-      };
+      }
       response = await api.uploadFiles(this.props.uploadTo || '', data);
       this.props.reload();
     } catch (e) {
@@ -47,25 +52,25 @@ class DropFilesForm extends Component {
     return (
       <>
         {this.showAlert(this.state.alert)}
-        <Jumbotron 
-          style={{ 'border': '2px dashed #aaa' }} 
-          className="m-0 p-0">
-          
-          <p onDrop={(e) => this.onSubmit(e) }
-            onDragEnter={(e) => this.preventAndStop(e) }
-            onDragLeave={(e) => this.preventAndStop(e) }
-            onDragOver={(e) => this.preventAndStop(e) }
-            style={{ 'color': '#777', 'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center', 'height': '120px' }} 
-            className="m-0">
-            
-            { 
-              this.state.uploading 
+        <Jumbotron style={{ border: '2px dashed #aaa' }} className="m-0 p-0">
+          <p
+            onDrop={(e) => this.onSubmit(e)}
+            onDragEnter={(e) => this.preventAndStop(e)}
+            onDragLeave={(e) => this.preventAndStop(e)}
+            onDragOver={(e) => this.preventAndStop(e)}
+            style={{
+              color: '#777',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '120px',
+            }}
+            className="m-0"
+          >
+            {this.state.uploading
               ? 'Uploading file(s)...'
-              : 'Drop File(s) Here to Upload'
-            }
-          
+              : 'Drop File(s) Here to Upload'}
           </p>
-       
         </Jumbotron>
       </>
     );
