@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { CloudArrowUpFill, FolderPlus } from 'react-bootstrap-icons';
 import FormModal from './FormModal';
 import PathForm from './forms/PathForm';
+import DropFilesForm from './forms/DropFilesForm';
 import FilesForm from './forms/FilesForm';
 import MkDirForm from './forms/MkDirForm';
 import Dirent from './Dirent';
@@ -79,6 +80,11 @@ class Dir extends Component {
           </Col>
         </Row>
         <h1 className="text-center">Content</h1>
+        <Row {...rowProps}>
+          <Col>
+            <DropFilesForm uploadTo={path} reload={() => this.reload()}></DropFilesForm>
+          </Col>
+        </Row>
         <Row {...rowProps}>
           <Col>
             <FormModal
