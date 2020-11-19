@@ -10,8 +10,8 @@ class PathForm extends Component {
   }
 
   processPath(path) {
-    const normalPath = path ? path.replace(/-/g, '/') : '';
-    const apiPath = path ? path.replace(/\//g, '-') : '';
+    const normalPath = path ? path.replace(/--/g, '/') : '';
+    const apiPath = path ? path.replace(/\//g, '--') : '';
 
     return { normalPath, apiPath };
   }
