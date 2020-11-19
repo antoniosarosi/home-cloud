@@ -25,7 +25,7 @@ const DirCard = (props) => {
     icon = <Arrow90degUp {...iconStyle} />;
   }
 
-  const path = props.path ? `${props.path}-${props.name}` : props.name;
+  const path = props.path ? `${props.path}--${props.name}` : props.name;
   const downloadLink = `${process.env.REACT_APP_API_URL}/download/${path}`;
 
   // TODO: Edit and delete files
@@ -70,10 +70,10 @@ const DirLink = (props) => {
 
   let link = `/content/${props.name}`;
   if (props.path) {
-    link = `${props.path}-${props.name}`;
+    link = `${props.path}--${props.name}`;
   }
   if (props.parentDirectory) {
-    link = link.split('-').slice(0, -2).join('-') || '/content/';
+    link = link.split('--').slice(0, -2).join('--') || '/content/';
   }
 
   return (
