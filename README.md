@@ -144,3 +144,8 @@ Build images and run containers:
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 ```
+
+
+### Infrastructure model
+
+![Insfrastructure model](.infragenie/infrastructure_model.png)
